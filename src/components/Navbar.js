@@ -33,11 +33,11 @@ export default function Navbar(props) {
                 Home
               </a>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link" href="/About">
                 {props.aboutText}
               </a>
-            </li>
+            </li> */}
           </ul>
 
           {/* Theme Circles */}
