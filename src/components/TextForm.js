@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
+ 
   // State to manage the text input
-  const [text, setText] = useState("Enter text here.."); // Initial state value set to 'Enter text here'
+  const [text, setText] = useState(""); // Initial state value set to 'Enter text here'
   // Initial state value
   const [fontStyle, setFontStyle] = useState("Arial"); // State for font style
 
@@ -32,17 +33,51 @@ export default function TextForm(props) {
     props.showalert("Text Cleared", "success");
   };
   //-----font chanege
-  const changeFont = () => {
-    console.log("Successfully changed font...!!!!!!11" + text);
-    setFontStyle((prevStyle) =>
-      prevStyle === "Arial" ? "Courier New" : "Arial"
-    );
-    props.showalert("Converted to OtherFont", "success");
-  };
+  // const changeFont = () => {
+  //   console.log("Successfully changed font...!!!!!!11" + text);
+  //   setFontStyle((prevStyle) =>
+  //     prevStyle === "Arial" ? "Courier New" : "Arial"
+  //   );
+  //   props.showalert("Converted to OtherFont", "success");
+  // };
+  const fonts = [
+    "Arial", 
+    "Courier New", 
+    "Times New Roman", 
+    "Verdana", 
+    "Georgia",
+    "Cursive", 
+    "Fantasy", 
+    "Monospace",
+    "Brush Script MT", 
+    "Comic Sans MS",
+    "Lobster",
+    "Pacifico",
+    "Dancing Script",
+    "'Billisight', sans-serif"  // Yeh custom font hai agar available ho
+];
+
+
+const changeFont = () => {
+    console.log("Successfully changed font...!!!!!! " + text);
+
+    setFontStyle((prevStyle) => {
+        let currentIndex = fonts.indexOf(prevStyle);
+        let nextIndex = (currentIndex + 1) % fonts.length; // Circular switching
+        return fonts[nextIndex];
+    });
+
+    props.showalert("Converted to Other Font", "success");
+};
+
 //-----copy Text
   const handlecopy = () => {
     console.log("Successfully Copy Text...!!!!!!11" + text);
-    navigator.clipboard.writeText(text);
+    // var text = document.getElementById("myBox");
+    // text.select();
+  //  navigator.clipboard.writeText(text.value);
+  //  document.getSelection().removeAllRanges();
+  navigator.clipboard.writeText(text);
     props.showalert("Copied to Clipboard", "success");
   };
 
@@ -78,22 +113,22 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         {/* Button to trigger conversion of text to uppercase */}
-        <button className="btn btn-primary mx-1" style={{ backgroundColor : props.buttonColor}}  onClick={handliClik}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1  my-1" style={{ backgroundColor : props.buttonColor}}  onClick={handliClik}>
           Convert to UpperCase
         </button>
-        <button className="btn btn-primary mx-1" style={{ backgroundColor: props.mode === 'dark' || 'light' ? 'primary' : props.buttonColor}} onClick={handliClik1}>
+        <button disabled={text.length===0}className="btn btn-primary mx-1 my-1" style={{ backgroundColor: props.mode === 'dark' || 'light' ? 'primary' : props.buttonColor}} onClick={handliClik1}>
           Convert to LowerCase
         </button>
-        <button className="btn btn-primary mx-1" onClick={cleartext}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={cleartext}>
           Clear Text
         </button>
-        <button className="btn btn-primary mx-1" onClick={changeFont}>
+        <button disabled={text.length===0}className="btn btn-primary mx-1 my-1" onClick={changeFont}>
           Font Change
         </button>
-        <button className="btn btn-primary mx-1" onClick={handlecopy}>
+        <button disabled={text.length===0}className="btn btn-primary mx-1 my-1" onClick={handlecopy}>
           Copy Text
         </button>
-        <button className="btn btn-primary mx-1" onClick={RemoveSpace}>
+        <button disabled={text.length===0}className="btn btn-primary mx-1 my-1" onClick={RemoveSpace}>
          Remove Extra Space
         </button>
       </div>
@@ -101,11 +136,11 @@ export default function TextForm(props) {
         <h3 style={{color:props.mode==='light' ?'black':'white'}}>Your Text Summary</h3>
         {/* text.split(" ").length ka matlab hota hai string ko space ke basis par todna aur total parts ya words ka count nikalna. */}
         <p style={{color:props.mode==='light' ?'black':'white'}}>
-          {text.split(" ").length} words and {text.length} charators
+          {text.split(/\s+/).filter((element) => {return element.length!==0}).length} words and {text.replace(/\s/g, "").length} Characters
         </p>
-        <p style={{color:props.mode==='light' ?'black':'white'}}>{0.008 * text.length} Minutes read</p>
-        <h4  style={{color:props.mode==='light' ?'black':'white'}}>Priview </h4>
-        <p style={{color:props.mode==='light' ?'black':'white'}}>{text.length>0?text:"Enter something in the textbox above to preview it here..!!"}</p>
+        <p style={{color:props.mode==='light' ?'black':'white'}}>{0.008 * text.split(" ").filter((element) => {return element.length!==0}).length} Minutes read</p>
+        <h4  style={{color:props.mode==='light' ?'black':'white'}} >Priview </h4>
+        <p style={{color:props.mode==='light' ?'black':'white',  fontFamily: fontStyle}} >{text.length>0?text:"Nothing to preview .!!"}</p>
       </div>
     </>
   );

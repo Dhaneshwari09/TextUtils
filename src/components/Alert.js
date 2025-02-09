@@ -9,13 +9,14 @@ function Alert(props) {
   };
 
   return (
-    props.alert && (
-      //alert-warning === alert-${props.alert.type} show type mean in green box
-      <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
-        <strong>{capitalize(props.alert.type)}</strong>: {props.alert.msg}
+    <div style={{height: '50px'}}>
+       { props.alert && 
+          //alert-warning === alert-${props.alert.type} show type mean in green box
+          <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
+            <strong>{capitalize(props.alert.type)}</strong>: {props.alert.msg}
+          </div>}
       </div>
-    )
-  );
+  )
 }
 
 export default Alert;

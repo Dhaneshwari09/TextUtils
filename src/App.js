@@ -3,14 +3,14 @@ import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import './App.css';
 import Alert from "./components/Alert";
-//import About from "./components/About";
+import About from "./components/About";
 
 // React-Router-package
-// import {
-//   BrowserRouter as Router,
-//   Routes, // Replace Switch with Routes
-//   Route,  // Keep Route as it is
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes, // Replace Switch with Routes
+  Route,  // Keep Route as it is
+} from "react-router-dom";
 
 function App() {
   // state for light/dark mode
@@ -49,7 +49,10 @@ function App() {
   };
 
   // Toggle mode function
-  const toggleMode = () => {
+  const toggleMode = (cls) => {
+    // removeBodyClasses();
+    // console.log(cls)
+    //document.body.classList.add('bg-'+cls)
     if (mode === 'light') {
       setMode('dark');
       settext('Enable Dark Mode');
@@ -64,31 +67,43 @@ function App() {
       document.title = 'TextUtils - Light Mode';
     }
   };
+  //-for body color remove  
+  // const removeBodyClasses= ()=>{
+  //   document.body.classList.remove('bg-primary');
+  //   document.body.classList.remove('bg-secondary');
+  //   document.body.classList.remove('bg-success');
+  //   document.body.classList.remove('bg-danger');
+  //   document.body.classList.remove('bg-warning');
+  //   document.body.classList.remove('bg-info');
+  //   document.body.classList.remove('bg-dark');
+  //   document.body.classList.remove('bg-light');
+    
+  // }
 
   return (
     <>
     {/* this is for routing example but this cooment on 17th vedio bcz its create problem when deploy on github page */}
-      {/* <Router>
-        <Navbar title="TextUtil's" aboutText="About" mode={mode} toggleMode={toggleMode} text={text} changeTheme={changeTheme} />
+      <Router>
+        <Navbar title="TextUtil's" aboutText="About" mode={mode} toggleMode={toggleMode} text={text} />
         <Alert alert={alert} />
         
         <div className="container my-3">
-          <Routes> Use Routes instead of Switch
-            <Route exact path="/about" element={<About />} /> {/* Use element instead of children */}
-            {/* <Route exact path="/Home" element={<TextForm showalert={showalert} heading="Enter the text to analyze below" mode={mode} buttonColor={buttonColor} />} />
+          <Routes> 
+            <Route exact path="/about" element={<About mode={mode}/>} /> {/* Use element instead of children */}
+            <Route exact path="/Home" element={<TextForm showalert={showalert} heading="Enter the text to analyze below" mode={mode}  />} />
             </Routes>
         </div>
-      </Router> */} 
-     
+      </Router>
+      
         {/* <Navbar title="TextUtil's" aboutText="About" mode={mode} toggleMode={toggleMode} text={text} changeTheme={changeTheme} /> */}
-        <Navbar title="TextUtil's" aboutText="About" mode={mode} toggleMode={toggleMode} text={text} />
+        {/* <Navbar title="TextUtil's" aboutText="About" mode={mode} toggleMode={toggleMode} text={text} />
         <Alert alert={alert} />
         
         <div className="container my-3">
             {/* <About /> */}
             {/* <TextForm showalert={showalert} heading="Enter the text to analyze below" mode={mode} buttonColor={buttonColor} />  */}
-            <TextForm showalert={showalert} heading="Enter the text to analyze below" mode={mode}  /> 
-        </div>
+            {/* <TextForm showalert={showalert} heading="Enter the text to analyze below" mode={mode}  />  */}
+        {/* </div> */}
     </>
   );
 }
