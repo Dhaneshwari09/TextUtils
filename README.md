@@ -2,17 +2,17 @@ TextUtils is a feature-rich web application built with **React.js**, designed to
 
 ## Features:
 
--**Case Conversion:** Quickly transform text to uppercase or lowercase.
+- **Case Conversion:** Quickly transform text to uppercase or lowercase.
 
--**Clipboard Integration:** Copy formatted text with a single click.
+- **Clipboard Integration:** Copy formatted text with a single click.
 
--**Text Cleanup:** Remove unnecessary spaces and clear text effortlessly.
+- **Text Cleanup:** Remove unnecessary spaces and clear text effortlessly.
 
--**Font Customization:** Modify text appearance for better readability.
+- **Font Customization:** Modify text appearance for better readability.
 
--**Real-Time Notifications:** Get instant feedback on every action.
+- **Real-Time Notifications:** Get instant feedback on every action.
 
--**Theme Toggle:** Switch between light and dark modes for a personalized experience.
+- **Theme Toggle:** Switch between light and dark modes for a personalized experience.
 
 ## Technologies Used:
 
